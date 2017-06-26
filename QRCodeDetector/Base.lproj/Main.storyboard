@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="QRCodeDetector" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="maY-nr-flh">
+                                <rect key="frame" x="36" y="80" width="303" height="152"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcd-tz-lDC">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="C5J-kX-0pk"/>
+                                        </constraints>
+                                        <state key="normal" title="QRコード読み込み"/>
+                                        <connections>
+                                            <action selector="read" destination="BYZ-38-t0r" eventType="touchUpInside" id="MYa-Ok-txR"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Zjx-gH-OZu">
+                                        <rect key="frame" x="0.0" y="74" width="303" height="78"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oq9-jP-LLn">
+                                                <rect key="frame" x="0.0" y="0.0" width="303" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="NOf-qA-mVp"/>
+                                                </constraints>
+                                                <state key="normal" title="QRコード表示"/>
+                                                <connections>
+                                                    <action selector="write" destination="BYZ-38-t0r" eventType="touchUpInside" id="f7j-3k-VLx"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="QRコードに含める文字列" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6ST-te-3PB">
+                                                <rect key="frame" x="0.0" y="48" width="303" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="6ST-te-3PB" secondAttribute="trailing" id="9Io-CR-AEL"/>
+                                            <constraint firstAttribute="trailing" secondItem="Oq9-jP-LLn" secondAttribute="trailing" id="FHG-fI-zSz"/>
+                                            <constraint firstAttribute="bottom" secondItem="6ST-te-3PB" secondAttribute="bottom" id="HgY-Gl-pvP"/>
+                                            <constraint firstItem="Oq9-jP-LLn" firstAttribute="top" secondItem="Zjx-gH-OZu" secondAttribute="top" id="NCA-Ir-wMt"/>
+                                            <constraint firstItem="6ST-te-3PB" firstAttribute="leading" secondItem="Zjx-gH-OZu" secondAttribute="leading" id="qKV-VS-vnM"/>
+                                            <constraint firstItem="Oq9-jP-LLn" firstAttribute="leading" secondItem="Zjx-gH-OZu" secondAttribute="leading" id="wt6-RC-S4U"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Zjx-gH-OZu" secondAttribute="trailing" id="Nk0-db-DAg"/>
+                                    <constraint firstItem="pcd-tz-lDC" firstAttribute="leading" secondItem="maY-nr-flh" secondAttribute="leading" id="bzP-lD-s2G"/>
+                                    <constraint firstItem="Zjx-gH-OZu" firstAttribute="leading" secondItem="maY-nr-flh" secondAttribute="leading" id="fOf-ja-zui"/>
+                                    <constraint firstItem="pcd-tz-lDC" firstAttribute="top" secondItem="maY-nr-flh" secondAttribute="top" id="isf-Xf-tRK"/>
+                                    <constraint firstAttribute="trailing" secondItem="pcd-tz-lDC" secondAttribute="trailing" id="smU-07-hD8"/>
+                                </constraints>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L3q-Wm-8Or">
+                                <rect key="frame" x="36" y="344" width="303" height="303"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="L3q-Wm-8Or" secondAttribute="height" multiplier="1:1" id="9sL-ua-gEa"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="maY-nr-flh" secondAttribute="trailing" constant="20" id="2q9-tI-raS"/>
+                            <constraint firstItem="maY-nr-flh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Gfz-MU-yNo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="L3q-Wm-8Or" secondAttribute="trailing" constant="20" id="LTO-AJ-Vbq"/>
+                            <constraint firstItem="maY-nr-flh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="Wm4-oW-tUa"/>
+                            <constraint firstItem="L3q-Wm-8Or" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="eLB-B9-ZI0"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="L3q-Wm-8Or" secondAttribute="bottom" constant="20" id="m2l-BT-TkD"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="barcodeView" destination="L3q-Wm-8Or" id="C16-7X-CWE"/>
+                        <outlet property="inputField" destination="6ST-te-3PB" id="wdd-u9-b6B"/>
+                        <outlet property="readButton" destination="pcd-tz-lDC" id="ddN-TK-2vx"/>
+                        <outlet property="writeButton" destination="Oq9-jP-LLn" id="g6S-W8-LzF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="138.98050974512745"/>
+        </scene>
+    </scenes>
+</document>
