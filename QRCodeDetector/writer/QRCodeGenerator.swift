@@ -15,6 +15,8 @@ fileprivate let FilterNameQRCode = "CIQRCodeGenerator"
 fileprivate let FilterParamInputMessage = "inputMessage"
 fileprivate let FilterParamCorrectionLevel = "inputCorrectionLevel"
 
+let QRCodeEncoding = String.Encoding.isoLatin1
+
 /// QRコードの生成を行うクラスです。
 class QRCodeGenerator {
 
@@ -35,31 +37,43 @@ class QRCodeGenerator {
 
     /// QRコードを生成します。
     ///
-    /// - Parameter data: コード内に含めるデータ
-    /// - Returns: QRコードの画像
-    class func generate(data: Data) -> UIImage? {
-        guard let image = QRCodeGenerator().generateCode(data: data) else {
-            return nil
-        }
-        return UIImage(cgImage: image)
-    }
-
-    /// QRコードを生成します。
-    ///
     /// - Parameters:
     ///   - data: コード内に含めるデータ
     ///   - constraints: 画像サイズ（指定されたサイズに拡大/縮小されます。）
     /// - Returns: QRコードの画像
-    class func generate(data: Data, constraints: CGSize) -> UIImage? {
-        guard let image = self.generate(data: data) else {
+    class func generate(data: Data, constraints: CGSize? = nil) -> UIImage? {
+        guard let image = QRCodeGenerator().generateCode(data: data) else {
             return nil
         }
-        UIGraphicsBeginImageContextWithOptions(constraints, true, 0)
+        guard let size = constraints else {
+            return UIImage(cgImage: image)
+        }
+        UIGraphicsBeginImageContextWithOptions(size, true, 0)
         let ctx = UIGraphicsGetCurrentContext()
         ctx?.interpolationQuality = .none
-        image.draw(in: CGRect(x: 0, y: 0, width: constraints.width, height: constraints.height))
+        ctx?.draw(image, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let resized = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return resized
     }
+
+    /// QRコードを生成します。
+    /// 指定された文字列のエンコードは以下の順で行われます。
+    ///
+    /// * ISO Latin1 (ISO 8859-1)
+    /// * UTF-8
+    ///
+    /// いずれのエンコードにも失敗した場合は nil が返されます。
+    ///
+    /// - Parameter string: コード内に含める文字列
+    /// - Returns: QRコードの画像
+    class func generate(string: String, constraints: CGSize? = nil) -> UIImage? {
+        for encoding in [QRCodeEncoding, .utf8] {
+            if let data = string.data(using: encoding) {
+                return generate(data: data, constraints: constraints)
+            }
+        }
+        return nil
+    }
 }
+

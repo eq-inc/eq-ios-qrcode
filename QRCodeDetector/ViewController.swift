@@ -57,9 +57,7 @@ class ViewController: UIViewController {
         if text.lengthOfBytes(using: .utf8) == 0 {
             text = "EQいいゾ〜"
         }
-        let data = text.data(using: .utf8)!
-        let size = barcodeView.bounds.size
-        barcodeView.image = QRCodeGenerator.generate(data: data, constraints: size)
+        barcodeView.image = QRCodeGenerator.generate(string: text, constraints: barcodeView.bounds.size)
         if inputField.isFirstResponder {
             inputField.resignFirstResponder()
         }
