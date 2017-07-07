@@ -10,10 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet var readButton: UIButton!
-    @IBOutlet var writeButton: UIButton!
-    @IBOutlet var inputField: UITextField!
-    @IBOutlet var barcodeView: UIImageView!
+    @IBOutlet weak var albumButton: UIButton!
+    @IBOutlet weak var readButton: UIButton!
+    @IBOutlet weak var writeButton: UIButton!
+    @IBOutlet weak var inputField: UITextField!
+    @IBOutlet weak var barcodeView: UIImageView!
 
     let logView = UITextView()
 
@@ -52,14 +53,20 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func album() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
+
     @IBAction func write() {
         var text = inputField.text ?? ""
         if text.lengthOfBytes(using: .utf8) == 0 {
             text = "EQいいゾ〜"
         }
-        barcodeView.image = QRCodeGenerator.generate(string: text, constraints: barcodeView.bounds.size)
-        if inputField.isFirstResponder {
-            inputField.resignFirstResponder()
+        if let image = QRCodeGenerator.generate(string: text, constraints: barcodeView.bounds.size) {
+            showQRCode(image: image)
         }
     }
 
@@ -67,6 +74,13 @@ class ViewController: UIViewController {
         DispatchQueue.main.async {
             let text = self.logView.text
             self.logView.text = message + "\n" + (text ?? "")
+        }
+    }
+
+    fileprivate func showQRCode(image: UIImage) {
+        barcodeView.image = image
+        if inputField.isFirstResponder {
+            inputField.resignFirstResponder()
         }
     }
 }
@@ -78,3 +92,19 @@ extension ViewController: QRCodeCaptureDelegate {
     }
 }
 
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            return
+        }
+        guard let arr = QRCodeDetector().detect(from: image) else {
+            return
+        }
+        if let descriptor = arr.first {
+            if let image = QRCodeGenerator.generate(descriptor: descriptor, constraints: barcodeView.bounds.size) {
+                showQRCode(image: image)
+            }
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+}

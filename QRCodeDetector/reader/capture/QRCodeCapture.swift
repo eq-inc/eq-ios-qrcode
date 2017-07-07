@@ -125,19 +125,8 @@ class QRCodeCapture: NSObject {
     }
 
     private func availableVideoDevice() -> AVCaptureDevice? {
-        guard let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as? [AVCaptureDevice] else {
-            return nil
-        }
-        var available: AVCaptureDevice?
-        for device in devices {
-            if device.position == .back {
-                return device
-            } else if device.position == .front {
-                //MEMO: 背面カメラが故障していた場合に備える
-                available = device
-            }
-        }
-        return available
+        let discovery = AVCaptureDeviceDiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaTypeVideo, position: .back)
+        return discovery?.devices.first
     }
 
     //

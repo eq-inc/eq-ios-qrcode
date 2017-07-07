@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00FAAA461F08D48A00D156CA /* QRCodeDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FAAA451F08D48A00D156CA /* QRCodeDetector.swift */; };
 		F550F37F1EFB675B000A3E1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550F37E1EFB675B000A3E1C /* AppDelegate.swift */; };
 		F550F3811EFB675B000A3E1C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550F3801EFB675B000A3E1C /* ViewController.swift */; };
 		F550F3841EFB675B000A3E1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F550F3821EFB675B000A3E1C /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00FAAA451F08D48A00D156CA /* QRCodeDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeDetector.swift; sourceTree = "<group>"; };
 		F550F37B1EFB675B000A3E1C /* QRCodeDetector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeDetector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F550F37E1EFB675B000A3E1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F550F3801EFB675B000A3E1C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00FAAA431F08D0E100D156CA /* image */ = {
+			isa = PBXGroup;
+			children = (
+				00FAAA451F08D48A00D156CA /* QRCodeDetector.swift */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		00FAAA441F08D0F700D156CA /* capture */ = {
+			isa = PBXGroup;
+			children = (
+				F550F3AF1EFB682A000A3E1C /* PreviewView.swift */,
+				F550F3AE1EFB682A000A3E1C /* QRCodeCapture.swift */,
+				F550F3B01EFB682A000A3E1C /* QRCodeCaptureViewController.swift */,
+			);
+			path = capture;
+			sourceTree = "<group>";
+		};
 		F550F3721EFB675B000A3E1C = {
 			isa = PBXGroup;
 			children = (
@@ -138,9 +158,8 @@
 		F550F3AC1EFB67E0000A3E1C /* reader */ = {
 			isa = PBXGroup;
 			children = (
-				F550F3AF1EFB682A000A3E1C /* PreviewView.swift */,
-				F550F3AE1EFB682A000A3E1C /* QRCodeCapture.swift */,
-				F550F3B01EFB682A000A3E1C /* QRCodeCaptureViewController.swift */,
+				00FAAA431F08D0E100D156CA /* image */,
+				00FAAA441F08D0F700D156CA /* capture */,
 			);
 			path = reader;
 			sourceTree = "<group>";
@@ -290,6 +309,7 @@
 				F550F37F1EFB675B000A3E1C /* AppDelegate.swift in Sources */,
 				F550F3B41EFB6935000A3E1C /* QRCodeCaptureViewController.swift in Sources */,
 				F550F3B21EFB6935000A3E1C /* PreviewView.swift in Sources */,
+				00FAAA461F08D48A00D156CA /* QRCodeDetector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,7 +473,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4722VAN7WU;
 				INFOPLIST_FILE = QRCodeDetector/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.eq-inc.QRCodeDetector";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -468,7 +488,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4722VAN7WU;
 				INFOPLIST_FILE = QRCodeDetector/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.eq-inc.QRCodeDetector";
 				PRODUCT_NAME = "$(TARGET_NAME)";

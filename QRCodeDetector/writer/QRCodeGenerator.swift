@@ -15,7 +15,22 @@ fileprivate let FilterNameQRCode = "CIQRCodeGenerator"
 fileprivate let FilterParamInputMessage = "inputMessage"
 fileprivate let FilterParamCorrectionLevel = "inputCorrectionLevel"
 
+fileprivate let FilterNameBarcode = "CIBarcodeGenerator"
+fileprivate let FilterParamInputDescriptor = "inputBarcodeDescriptor"
+
 let QRCodeEncoding = String.Encoding.isoLatin1
+
+func resizeImage(_ image: CGImage, to: CGSize) -> UIImage? {
+    UIGraphicsBeginImageContextWithOptions(to, true, 0)
+    let ctx = UIGraphicsGetCurrentContext()
+    ctx?.interpolationQuality = .none
+    ctx?.translateBy(x: 0, y: to.height)
+    ctx?.scaleBy(x: 1, y: -1)
+    ctx?.draw(image, in: CGRect(x: 0, y: 0, width: to.width, height: to.height))
+    let resized = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    return resized
+}
 
 /// QRコードの生成を行うクラスです。
 class QRCodeGenerator {
@@ -48,13 +63,7 @@ class QRCodeGenerator {
         guard let size = constraints else {
             return UIImage(cgImage: image)
         }
-        UIGraphicsBeginImageContextWithOptions(size, true, 0)
-        let ctx = UIGraphicsGetCurrentContext()
-        ctx?.interpolationQuality = .none
-        ctx?.draw(image, in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-        let resized = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return resized
+        return resizeImage(image, to: size)
     }
 
     /// QRコードを生成します。
@@ -74,6 +83,30 @@ class QRCodeGenerator {
             }
         }
         return nil
+    }
+
+    //
+    // MARK: - Vision
+    //
+    private func generateCode(descriptor: CIBarcodeDescriptor) -> CGImage? {
+        let params: [String:Any] = [
+            FilterParamInputDescriptor: descriptor
+        ]
+        let filter = CIFilter(name: FilterNameBarcode, withInputParameters: params)
+        guard let image = filter?.outputImage else {
+            return nil
+        }
+        return CIContext().createCGImage(image, from: image.extent)
+    }
+
+    class func generate(descriptor: CIBarcodeDescriptor, constraints: CGSize? = nil) -> UIImage? {
+        guard let image = QRCodeGenerator().generateCode(descriptor: descriptor) else {
+            return nil
+        }
+        guard let size = constraints else {
+            return UIImage(cgImage: image)
+        }
+        return resizeImage(image, to: size)
     }
 }
 

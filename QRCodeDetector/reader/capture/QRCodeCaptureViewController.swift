@@ -117,6 +117,7 @@ extension QRCodeCaptureViewController: BarcodeCaptureDelegate {
             showDetectedArea(codeObject)
         }
         if let delegate = delegate {
+            // codeObject.descriptor により CIBarcodeDescriptor を取り出せます。
             return delegate.capture(capture, didDetect: value)
         }
         return true
@@ -137,7 +138,7 @@ extension QRCodeCaptureViewController
                                                 style: .`default`,
                                                 handler: { _ in
                                                     let url = URL(string: UIApplicationOpenSettingsURLString)!
-                                                    UIApplication.shared.openURL(url)
+                                                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }))
         self.present(alertController, animated: true, completion: nil)
     }
